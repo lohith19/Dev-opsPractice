@@ -11,22 +11,29 @@ N="\e[0m"
 Time=$($date +%F-%H-%M-%S)
 Logs="/var/$0-$Time.log"
 
-echo "script started executing at $Y $Time $N" &>> $Logs
+echo -e "script started executing at $Y $Time $N" &>> $Logs
 
+VALIDATE(){ # to check if  properly installed 
+    if [ $1 -ne 0]
+    echo -e "$2 is $R Failed $N"
+    else
+    echo -e "$2 is $G Success $N"
+}
 
-if [ $ID ne 0 ]
+if [ $ID -ne 0 ]
 then
-    echo "Not root user"
-    exit 1 # to exit the script incase of error
+    echo "$R Not root user $N"
+    exit 1 # to exit the script incase user is not admin
 else
     for package in $@
     do
         yum list installed $package &>> $Logs # to check if package is already installed.
-        if [ $? ne 0] # if not installed
+        if [ $? -ne 0] # if not installed
         then
             yum install $package -y &>> $Logs
+            VALIDATE $1 "Installation of $package"
         else
-            echo "$Package is already installed"
+            echo -e "$Package is already installed "
         fi
     done
 fi
