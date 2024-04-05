@@ -18,23 +18,24 @@ VALIDATE(){ # to check if  properly installed
         echo -e "$2 is $R Failed $N"
     else
         echo -e "$2 is $G Success $N"
+    fi
 }
 
 if [ $ID -ne 0 ]
-then
-    echo "$R Not root user $N"
-    exit 1 # to exit the script incase user is not admin
+    then
+        echo "$R Not root user $N"
+        exit 1 # to exit the script incase user is not admin
 else
     for package in $@
-    do
-        yum list installed $package &>> $Logs # to check if package is already installed.
-        if [ $? -ne 0] # if not installed
-        then
-            yum install $package -y &>> $Logs
-            VALIDATE $? "Installation of $package"
-        else
+        do
+         yum list installed $package &>> $Logs # to check if package is already installed.
+         if [ $? -ne 0] # if not installed
+             then
+             yum install $package -y &>> $Logs
+             VALIDATE $? "Installation of $package"
+         else
             echo -e "$Package is already installed "
-        fi
+         fi
     done
 fi
 
