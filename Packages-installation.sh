@@ -53,7 +53,7 @@ else
              yum install $PACKAGE -y &>> $Logs
              VALIDATE $? "Installation of $PACKAGE"
          else
-            echo -e "$PACKAGE is already installed "
+            echo -e " $Y $PACKAGE is already installed $N "
          fi
     done
 fi
