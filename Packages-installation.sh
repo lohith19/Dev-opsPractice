@@ -30,7 +30,7 @@ else
     for package in $@
         do
          yum list installed $package &>> $Logs # to check if package is already installed.
-         if [ $? -ne 0] # if not installed
+         if [ $? -ne 0 ] # if not installed
              then
              yum install $package -y &>> $Logs
              VALIDATE $? "Installation of $package"
