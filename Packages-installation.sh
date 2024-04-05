@@ -22,7 +22,6 @@ VALIDATE() { # to check if  properly installed
     fi
 }
 
-<<comment 
 USAGE(){
  echo "COMMAND USAGE:: $(basename $0) -p <PACKAGE name>"
  echo "Options: "
@@ -38,16 +37,14 @@ do
         \?) echo "Invalid Options: -"$OPTARG"" >$2; USAGE; exit;;
     esac
 done 
-comment
+
 
 if [ $ID -ne 0 ]
     then
         echo "$R Not root user $N"
         exit 1 # to exit the script incase user is not admin
 else
-    for PACKAGE in $@
-        do
-         yum list installed $PACKAGE &>> $Logs # to check if PACKAGE is already installed.
+    yum list installed $PACKAGE &>> $Logs # to check if PACKAGE is already installed.
          if [ $? -ne 0 ] # if not installed
              then
              yum install $PACKAGE -y &>> $Logs
@@ -55,6 +52,5 @@ else
          else
             echo -e " $Y $PACKAGE is already installed $N "
          fi
-    done
 fi
 
