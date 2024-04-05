@@ -13,8 +13,9 @@ Logs="/var/$0-$Time.log"
 
 echo -e "script started executing at $Y $Time $N" &>> $Logs
 
-VALIDATE(){ # to check if  properly installed 
-    if [ $1 -ne 0]
+VALIDATE() { # to check if  properly installed 
+    if [ $1 -ne 0 ]
+    then
         echo -e "$2 is $R Failed $N"
     else
         echo -e "$2 is $G Success $N"
