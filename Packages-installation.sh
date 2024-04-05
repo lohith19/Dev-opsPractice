@@ -8,16 +8,16 @@ Y="\e[33m"
 N="\e[0m"
 
 #create a log file
-Time=$($date +%F-%H-%M-%S)
+Time=$(date +%F-%H-%M-%S)
 Logs="/var/$0-$Time.log"
 
 echo -e "script started executing at $Y $Time $N" &>> $Logs
 
 VALIDATE(){ # to check if  properly installed 
     if [ $1 -ne 0]
-    echo -e "$2 is $R Failed $N"
+        echo -e "$2 is $R Failed $N"
     else
-    echo -e "$2 is $G Success $N"
+        echo -e "$2 is $G Success $N"
 }
 
 if [ $ID -ne 0 ]
@@ -31,7 +31,7 @@ else
         if [ $? -ne 0] # if not installed
         then
             yum install $package -y &>> $Logs
-            VALIDATE $1 "Installation of $package"
+            VALIDATE $? "Installation of $package"
         else
             echo -e "$Package is already installed "
         fi
