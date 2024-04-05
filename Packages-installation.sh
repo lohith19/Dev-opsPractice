@@ -22,11 +22,12 @@ VALIDATE() { # to check if  properly installed
     fi
 }
 
+<<comment 
 USAGE(){
-    echo "COMMAND USAGE:: $(basename $0) -p <PACKAGE name>"
-    echo "Options: "
-    echo " -p: Specify the PACKAGE to be installed"
-    echo " -h: Display Help and exit" 
+ echo "COMMAND USAGE:: $(basename $0) -p <PACKAGE name>"
+ echo "Options: "
+ echo " -p: Specify the PACKAGE to be installed"
+ echo " -h: Display Help and exit" 
 }
 
 while getopts ":p:h" opt;
@@ -36,7 +37,8 @@ do
         h) USAGE; exit;;
         \?) echo "Invalid Options: -"$OPTARG"" >$2; USAGE; exit;;
     esac
-done
+done 
+comment
 
 if [ $ID -ne 0 ]
     then
