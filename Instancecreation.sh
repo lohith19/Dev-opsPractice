@@ -20,21 +20,21 @@ echo " $i: $IPADDRESS"
 #Note: Delete existing records incase of running sthe script again. This script need to be developed to check if record aleady exists and not create in record exists.
 aws route53 change-resource-record-sets \
   --hosted-zone-id $ZONEID \
-  --change-batch "
+  --change-batch '
   {
     "Comment": "Testing creating a record set"
     ,"Changes": [{
       "Action"              : "CREATE"
       ,"ResourceRecordSet"  : {
-        "Name"              : "$i.$DOMAINNAME"
+        "Name"              : "'$i'.'$DOMAINNAME'"
         ,"Type"             : "A"
         ,"TTL"              : 1
         ,"ResourceRecords"  : [{
-            "Value"         : "$IPADDRESS"
+            "Value"         : "'$IPADDRESS'"
         }]
       }
     }]
   }
-  "
+  '
 
 done
